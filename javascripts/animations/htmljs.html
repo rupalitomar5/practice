@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<style>
+#container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: yellow;
+}
+#animate {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: red;
+}
+#demo
+{
+position:absolute;
+}
+</style>
+<body>
+
+<p>
+<button onclick="myMove()" onmouseover="Mouse()" onmouseout="mouseout()">Click Me</button>
+</p> 
+
+<div id ="container">
+<div id ="animate"></div>
+<p id="demo"></p>
+</div>
+
+<script>
+var cnt=0;
+function myMove() 
+{
+var elem1 = document.getElementById("demo");
+if(cnt==0)
+{
+elem1.style.top="30px"
+//elem1.style.textAlign="center"  
+elem1.innerHTML="click again"
+cnt++;
+}
+else if(cnt==1)
+{
+elem1.innerHTML=elem1.innerHTML+" <br/> Thank You";
+cnt++;
+}
+else
+{
+elem1.style.visibility="hidden";}
+}
+function mouseout()
+{
+var elem = document.getElementById("animate");   
+elem.innerHTML=" " ;
+}
+function Mouse()
+{
+var elem = document.getElementById("animate");
+elem.innerHTML="Mouse on"  
+}
+</script>
+</body>
+</html>
+
