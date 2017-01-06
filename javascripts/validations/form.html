@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function move()
+{
+var element=document.forms['myform']['txtnm'];
+element.title="Enter Name"
+}
+function find()
+{
+var element=document.forms['myform']['txtnm'];
+if(element.validity.rangeUnderflow)
+{
+document.write("not a valid number");
+}
+else if(element.validity.rangeOverflow)
+{
+element.value=;
+}
+else{}
+}
+</script>
+</head>
+<body>
+<form id="Myform" name="myform">
+<input type ="number" id ="txtnm" onfocus="move()" min="1" max="150" required/>
+<input type="submit" id="txtsub" onclick="find()"/>
+</form>
+</body>
+</html>
