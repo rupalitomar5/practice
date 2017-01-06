@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#container {
+  width: 400px;
+  height: 50px;
+  position: relative;
+  background: yellow;
+}
+#animate {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: red;
+}
+</style>
+<script>
+function move(elem)
+{
+	var left=0;
+	function frame()
+	{
+left++;
+elem.style.left=left+"px";
+if(left==400)
+		clearInterval(id);
+	}
+	var id=setInterval(frame,10);
+}
+</script>
+</head>
+<body>
+<div onclick="move(this.children[0])" id ="container">
+<div id="animate">
+</div>
+</div>
+</body>
+</html>
