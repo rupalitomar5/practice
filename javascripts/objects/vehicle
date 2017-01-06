@@ -9,9 +9,10 @@
     <input type="submit" id="txtsub" onmouseup="delta()"/>
 </form>
 </div>
-<p id="txt">
+<div id="txt">
 
-</p>
+</div>
+<!--a href="" id ="dread"> A link </a-->
     <script>
         var Q;
         var element,element1;
@@ -24,7 +25,15 @@
                 this.companyName = company
             }
             Q = new vehicle(element, element1);
-        document.write (document.getElementById("txt1").innerHTML+"Vehicle Wheels : " + Q.wheel + " <br> Vehicle Company : " + Q.companyName);
+            //window.history.back()
+           // window.history.forward()
+            var mydiv = document.getElementById("txt");
+            var aTag = document.createElement('a');
+            aTag.setAttribute('href',"file:///home/lcom64/practice/javascripts/animations/practicejs.html");
+            aTag.innerHTML = "link text";
+            mydiv.appendChild(aTag);
+            document.write (document.getElementById("txt").innerHTML+document.getElementById("txt1").innerHTML+"Vehicle Wheels : " + Q.wheel + " <br> Vehicle Company : " + Q.companyName);
+
         }
     </script>
 </body>
