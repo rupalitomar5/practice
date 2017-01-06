@@ -24,7 +24,7 @@
                 this.companyName = company
             }
             Q = new vehicle(element, element1);
-        document.write (document.getElementById("txt").innerHTML+"Vehicle Wheels : " + Q.wheel + " <br> Vehicle Company : " + Q.companyName);
+        document.write (document.getElementById("txt1").innerHTML+"Vehicle Wheels : " + Q.wheel + " <br> Vehicle Company : " + Q.companyName);
         }
     </script>
 </body>
