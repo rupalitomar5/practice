@@ -1,0 +1,19 @@
+<html>
+<head>
+</head>
+<body>
+<p id="txt">
+</p>
+    <script>
+        function vehicle(wheels,company)
+        {
+            this.wheel=wheels
+            this.companyName=company
+        }
+        var Q=new vehicle(4,"Audi")
+        document.getElementById("txt").innerHTML="Vehicle Wheels : "+Q.wheel+" <br> Vehicle Company : "+Q.companyName;
+
+    </script>
+
+</body>
+</html>
