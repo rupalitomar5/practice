@@ -2,18 +2,30 @@
 <head>
 </head>
 <body>
+<div id="txt1">
+<form id="Myform" name="myform" method="get">
+    <input type ="number" id ="txtnm" />
+    <input type ="text" id ="txtcmp" />
+    <input type="submit" id="txtsub" onmouseup="delta()"/>
+</form>
+</div>
 <p id="txt">
+
 </p>
     <script>
-        function vehicle(wheels,company)
+        var Q;
+        var element,element1;
+        function delta()
         {
-            this.wheel=wheels
-            this.companyName=company
+             element = document.forms['myform']['txtnm'].value;
+             element1 = document.forms['myform']['txtcmp'].value;
+            function vehicle(wheels, company) {
+                this.wheel = wheels
+                this.companyName = company
+            }
+            Q = new vehicle(element, element1);
+        document.write (document.getElementById("txt").innerHTML+"Vehicle Wheels : " + Q.wheel + " <br> Vehicle Company : " + Q.companyName);
         }
-        var Q=new vehicle(4,"Audi")
-        document.getElementById("txt").innerHTML="Vehicle Wheels : "+Q.wheel+" <br> Vehicle Company : "+Q.companyName;
-
     </script>
-
 </body>
 </html>
