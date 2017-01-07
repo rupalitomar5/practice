@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table>
+    <form name="myform">
+        <tr>
+            <td>
+                Enter name
+            </td>
+            <td>
+                <input type="text" id="txt" name="nm"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enter address
+            </td>
+            <td>
+                <input type="text" id="txt1" name="add"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                <input type="button" name="Submit" value=" Submit" onmousedown="move()"/>
+            </td>
+        </tr>
+    </form>
+</table>
+
+<br>
+<br>
+<script>
+    var cnt=0;
+    function move()
+    {
+
+        var element=document.forms['myform']['nm'];
+        var element1=document.forms['myform']['add'];
+        var a=element.value;
+        var b=element1.value;
+        function add(a,b)
+        {
+            this.a=a;
+            this.b=b;
+        }
+        var q=new add(a,b);
+        var mydiv = document.getElementById('mytable');
+        var aTag = document.createElement('tr');
+        var aTag1= document.createElement('td');
+        aTag1.innerHTML= q.a;
+        aTag1.setAttribute('id',"td"+cnt);
+        var aTag2= document.createElement('td');
+        aTag2.innerHTML= q.b;
+        aTag2.setAttribute('id',"td1"+cnt);
+        mydiv.appendChild(aTag);
+        mydiv.appendChild(aTag1);
+        mydiv.appendChild(aTag2);
+        var aTag4= document.createElement('td');
+        var aTag3 = document.createElement('input');
+        aTag3.setAttribute('type',"button");
+        aTag3.setAttribute('name',"btn"+cnt);
+        aTag3.setAttribute('value',"edit");
+        mydiv.appendChild(aTag4);
+        aTag3.setAttribute('onmousedown',"move2("+cnt+")");
+        mydiv.appendChild(aTag3);
+
+        cnt++;
+    }
+    function move2(cnt)
+    {
+        document.forms['myform']['nm'].value=document.getElementById("td"+cnt).innerHTML;
+        document.forms['myform']['add'].value=document.getElementById("td1"+cnt).innerHTML;
+    }
+</script>
+<table id="mytable">
+
+</table>
+</body>
+</html>
