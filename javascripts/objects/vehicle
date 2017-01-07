@@ -5,8 +5,8 @@
 <div id="txt1">
 <form id="Myform" name="myform" method="get">
     <input type ="number" id ="txtnm" />
-    <input type ="text" id ="txtcmp" />
-    <input type="submit" id="txtsub" onmouseup="delta()"/>
+    <input type ="text" id ="txtcmp" onblur="delta1()"/>
+    <input type="submit" id="txtsub" onmouseup="delta()" />
 </form>
 </div>
 <div id="txt">
@@ -44,6 +44,13 @@
     <script>
         var Q;
         var element,element1;
+        function delta1()
+        {
+            if(document.forms['myform']['txtcmp'].value==NaN)
+            {
+                alert("Enter a valid number");
+            }
+        }
         function delta()
         {
              element = document.forms['myform']['txtnm'].value;
