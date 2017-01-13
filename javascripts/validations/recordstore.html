@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>
+
+    </title>
 </head>
 <body>
-<table>
+<table id="tb1" style="position: relative;">
     <form name="myform">
         <tr>
             <td>
@@ -25,10 +27,24 @@
         </tr>
         <tr>
             <td>
+                Enter phone number
+            </td>
+            <td>
+                <input type="text" id="txt2" name="phn"/>
+            </td>
+            <td>
+                <input type="button" id="txt3" value="+" onmousedown="add1()"/>
+            </td>
+            <td>
+                <input type="button" id="txt4" value="-" onmousedown="add2()"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
 
             </td>
             <td>
-                <input type="button" name="Submit" value=" Submit" onmousedown="move()"/>
+                <input type="button" name="Submit" value="Submit" onmousedown="move()"/>
             </td>
         </tr>
     </form>
@@ -37,46 +53,144 @@
 <br>
 <br>
 <script>
-    var cnt=0;
-    function move()
-    {
+    var cnt2;
+    var cnt=1;
+    var cnt1=0;
+    var cnt3;
+    var q;
+    var s;
+    var f;
+    function move() {
+        //document.write("the number is " + cnt2);
 
-        var element=document.forms['myform']['nm'];
-        var element1=document.forms['myform']['add'];
-        var a=element.value;
-        var b=element1.value;
-        function add(a,b)
-        {
-            this.a=a;
-            this.b=b;
+        if (cnt2<cnt && cnt2!=0) {
+            s = cnt2;
+            cnt2=0;
+            var s1=cnt3;
+            cnt3=0;
+            move4(s,s1);
+           // document.write("the value is"+this.a+this.b);
+
         }
-        var q=new add(a,b);
-        var mydiv = document.getElementById('mytable');
-        var aTag = document.createElement('tr');
-        var aTag1= document.createElement('td');
-        aTag1.innerHTML= q.a;
-        aTag1.setAttribute('id',"td"+cnt);
-        var aTag2= document.createElement('td');
-        aTag2.innerHTML= q.b;
-        aTag2.setAttribute('id',"td1"+cnt);
-        mydiv.appendChild(aTag);
-        mydiv.appendChild(aTag1);
-        mydiv.appendChild(aTag2);
-        var aTag4= document.createElement('td');
-        var aTag3 = document.createElement('input');
-        aTag3.setAttribute('type',"button");
-        aTag3.setAttribute('name',"btn"+cnt);
-        aTag3.setAttribute('value',"edit");
-        mydiv.appendChild(aTag4);
-        aTag3.setAttribute('onmousedown',"move2("+cnt+")");
-        mydiv.appendChild(aTag3);
+        else {
+            move3();
+        }
+        function move4(s,s1) {
+            move5();
+            document.getElementById("td" + s).innerHTML =q.a;
+            document.getElementById("td1" + s).innerHTML =q.b;
+            document.getElementById("td11" + s).innerHTML = q.c;
+            for(var i=1;i<=f;i++)
+            {
 
-        cnt++;
+            }
+        }
+
+        function move5() {
+        var d=[];
+        var element = document.forms['myform']['nm'];
+        var element1 = document.forms['myform']['add'];
+        var element2 = document.forms['myform']['phn'];
+        var c = element2.value;
+        var a = element.value;
+        var b = element1.value;
+        //document.write("the value is"+document.forms['myform']['txt10'].value);
+        for(var i=0;i<=f;i++)
+        { //var s=new String();
+            //d.push(document.getElementsByTagName("input").value);
+            //s=s+d[i];
+            //document.write("the number is"+d[i]);
+        }
+
+        function add(a, b, c, d) {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+            //this.d = d;
+        }
+
+        this.q = new add(a, b, c);
     }
-    function move2(cnt)
+        function move3() {
+           move5();
+            var mydiv = document.getElementById('mytable');
+            var aTag6 = document.createElement('tr');
+            var aTag1 = document.createElement('td');
+            aTag1.innerHTML = q.a;
+            aTag1.setAttribute('id', "td" + cnt);
+            var aTag2 = document.createElement('td');
+            aTag2.innerHTML = q.b;
+            var aTag5 = document.createElement('td');
+            aTag5.setAttribute('id', "td11" + cnt);
+            aTag5.innerHTML = q.c;
+            aTag2.setAttribute('id', "td1" + cnt);
+            mydiv.appendChild(aTag6);
+            mydiv.appendChild(aTag1);
+            mydiv.appendChild(aTag2);
+            var aTag4 = document.createElement('td');
+            var aTag3 = document.createElement('input');
+            aTag3.setAttribute('type', "button");
+            aTag3.setAttribute('name', "btn" + cnt);
+            aTag3.setAttribute('value', "edit");
+            mydiv.appendChild(aTag4);
+            mydiv.appendChild(aTag5);
+            aTag3.setAttribute('onmousedown', "move2(" + cnt + "," + cnt1 + ")");
+            mydiv.appendChild(aTag3);
+            //mydiv.appendChild(aTag6);
+
+
+            for(var i=0;i<=f;i++)
+            {
+                //document.write("the number is"+i);
+                var aTag= document.createElement('td');
+                aTag.setAttribute('id', "td111" + i);
+               // aTag.innerHTML=q.d[i];
+                mydiv.appendChild(aTag);
+            }
+            cnt++;
+        }
+    }
+
+    function add1()
     {
-        document.forms['myform']['nm'].value=document.getElementById("td"+cnt).innerHTML;
+        f=cnt1;
+
+
+        var mydiv = document.getElementById('tb1');
+        var v = document.createElement('tr');
+        v.setAttribute('id',""+)
+        var v1= document.createElement('td');
+        var v2= document.createElement('td');
+        var mydiv1 = document.forms['myform'];
+        var abd = document.createElement('input');
+        abd.setAttribute('type', "text");
+        abd.setAttribute('name',"txt1"+cnt1);
+        abd.value=" ";
+        mydiv.appendChild(v);
+        mydiv.appendChild(v1);
+        v1.innerHTML="Another phone number";
+        v2.value= mydiv.appendChild(abd);
+        mydiv.appendChild(v2);
+        //abd.value=" "
+        v2.setAttribute('id', "td111" + cnt1);
+        cnt1++;
+    //return cnt1;
+    }
+    function add2()
+    {
+        mydiv.removeChild(aTag);
+    }
+    function move2(cnt,cnt1)
+    {
+        cnt2=cnt;
+        cnt3=cnt1;
+        document.forms['myform']['nm'].value=document.getElementById("td"+cnt).innerHTML;;
         document.forms['myform']['add'].value=document.getElementById("td1"+cnt).innerHTML;
+        document.forms['myform']['phn'].value=document.getElementById("td11"+cnt).innerHTML;
+        for(var i=0;i<=f;i++)
+        {
+            document.forms['myform']['txt1'+i].value=document.getElementById("td111"+i).innerHTML;
+        }
     }
 </script>
 <table id="mytable">

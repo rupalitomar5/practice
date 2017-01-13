@@ -27,13 +27,17 @@ else{}
 <form id="Myform" name="myform">
 <!--input type ="number" id ="txtnm" onfocus="move()" min="1" max="150" required/-->
 <input type="button" id="txtsub" VALUE="submit" onclick="add1()"/>
+    <input type="button" id="txtsub" VALUE="submit" onclick="move()"/>
+    <p id ="demo"></p>
 </form>
 </div>
 <script>
     var cnt=0;
+    var e;
     function add1()
     {
     add(cnt);
+    e=cnt;
     cnt++;
     }
     function add()
@@ -44,6 +48,21 @@ else{}
         aTag.setAttribute('name',"txt1"+cnt);
         aTag.value= "";
         mydiv.appendChild(aTag);
+    }
+    function move()
+    {
+        var d=new Array(e);
+        var i=0;
+        var mydiv=document.forms['myform'];
+        for(i=-1;i<e;i++)
+        {
+            d[i]=document.forms['myform']['name'].value;
+        }
+        for(i=-1;i<d.length;i++)
+        {
+
+            document.write("the element is"+d[i]);
+        }
     }
 </script>
 </body>
