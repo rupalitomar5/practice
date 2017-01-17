@@ -1,0 +1,74 @@
+<html>
+<head>
+</head>
+<body>
+<div id="txt1">
+<form id="Myform" name="myform" method="get">
+    <input type ="number" id ="txtnm" />
+    <input type ="text" id ="txtcmp" onblur="delta1()"/>
+    <input type="submit" id="txtsub" onmouseup="delta()" />
+</form>
+</div>
+<div id="txt">
+
+</div>
+<style>
+    app-panel {
+        display: flex;
+    }
+    [is="x-item"] {
+        transition: opacity 400ms ease-in-out;
+        opacity: 0.3;
+        flex: 1;
+        text-align: center;
+        border-radius: 50%;
+    }
+    [is="x-item"]:hover {
+        opacity: 1.0;
+        background: rgb(255, 0, 255);
+        color: white;
+    }
+    app-panel > [is="x-item"] {
+        padding: 5px;
+        list-style: none;
+        margin: 0 7px;
+    }
+</style>
+
+<app-panel onclick="delta()">
+    <li is="x-item">Do</li>
+    <li is="x-item">Re</li>
+    <li is="x-item">Mi</li>
+</app-panel>
+<!--a href="" id ="dread"> A link </a-->
+    <script>
+        var Q;
+        var element,element1;
+        function delta1()
+        {
+            if(document.forms['myform']['txtcmp'].value==NaN)
+            {
+                alert("Enter a valid number");
+            }
+        }
+        function delta()
+        {
+             element = document.forms['myform']['txtnm'].value;
+             element1 = document.forms['myform']['txtcmp'].value;
+            function vehicle(wheels, company) {
+                this.wheel = wheels
+                this.companyName = company
+            }
+            Q = new vehicle(element, element1);
+            //window.history.back()
+           // window.history.forward()
+            var mydiv = document.getElementById("txt");
+            var aTag = document.createElement('a');
+            aTag.setAttribute('href',"file:///home/lcom64/practice/javascripts/animations/practicejs.html");
+            aTag.innerHTML = "link text";
+            mydiv.appendChild(aTag);
+            document.write (document.getElementById("txt").innerHTML+document.getElementById("txt1").innerHTML+"Vehicle Wheels : " + Q.wheel + " <br> Vehicle Company : " + Q.companyName);
+        }
+    </script>
+</body>
+</html>

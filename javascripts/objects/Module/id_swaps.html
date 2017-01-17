@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var s;
+        var openFile=function(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var text = reader.result;
+                var div=document.getElementById("s");
+                var rows=text.split("\n");
+                //alert(rows);
+
+                for(var i=0;i<rows.length;i++) {
+
+                    var cells=rows[i].split(",");
+                    if(cells[0]=="ZIP")
+                        continue;
+                    else {
+                        var option = document.createElement("option");
+                        option.setAttribute("value", cells[0]);
+                        option.innerHTML = cells[0];
+                        //only first column read
+                        div.appendChild(option);
+                    }
+                }
+
+
+               // console.log(reader.result.substring(0, 200));
+            };
+            reader.readAsText(input.files[0]);
+
+        }
+
+        var openFile1=function(event)
+        {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var text = reader.result;
+                var div=document.getElementById("s");
+                var rows=text.split("\n");
+            var mydiv=document.getElementById("s2");
+
+            var cells=rows[0].split(",");
+            for(var j=0;j<cells.length;j++){
+                var option = document.createElement("option");
+                option.setAttribute("value", cells[j]);
+                option.innerHTML =cells[j] ;
+                //only first column read
+                mydiv.appendChild(option);
+             s=cells.length;
+            }};
+           // document.write("the tpath of file is"+files[0]);
+            reader.readAsText(input.files[0]);
+        }
+    </script>
+</head>
+<body>
+<form name="f">
+    Zip code:
+    <select id="s" onchange="openFile3(event)">
+        <option value="select">select a zip code</option>
+    </select>
+    <input type="file" id="f1" onchange="openFile(event)"/>
+    <input type="file" id="f2" onchange="openFile1(event)"/>
+    <select id="s2" multiple>
+    </select>
+    <input type="button" value=">" onmousedown="mno()"/>
+    <input type="button" value="<" onmousedown="del()"/>
+    <input type="button" value=">>" onmousedown="alladd()"/>
+    <input type="button" value="<<" onmousedown="alldelete()"/>
+    <input type="button" value="^" onmousedown="up()"/>
+    <input type="button" value="\/" onmousedown="down()"/>
+    <input type="button" value="records" onmousedown="mno1()">
+
+    <select id="s3" multiple>
+    </select>
+    <select id="s1">
+        <option value="opt">Country code</option>
+    </select>
+</form>
+<table id="tb1">
+
+</table>
+<script>
+var cnt=0;
+var openFile3=function()
+{
+    //var input=event.target;
+    var reader = new FileReader();
+    reader.readAsText(document.getElementById("f1").files[0]);
+    reader.onload = function () {
+        var text = reader.result;
+        //var div=document.getElementById("s");
+        var rows = text.split("\n");
+        var mdiv = document.getElementById("s1");
+        var l=document.forms['f']['s'].value;
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].split(",");
+            //document.write(" the text is"+cells[0]+l);
+            if (cells[0]==l) {
+
+                var option = document.createElement("option");
+                option.setAttribute("value",cells[1]);
+                option.innerHTML = cells[1];
+                //only first column read
+                mdiv.appendChild(option);
+            }
+        }
+
+}
+
+
+
+}
+    function mno()
+    {
+
+        // var option = document.createElement("option");
+            var cell=document.forms['f']['s2'].value;
+
+            var mdiv=document.getElementById("s2");
+        var mdiv1=document.getElementById("s3");
+         var option = document.createElement("option");
+         option.setAttribute("id","opt1"+cnt);
+         option.setAttribute("value",cell);
+         option.innerHTML =cell;
+
+         //only first column read
+         mdiv1.appendChild(option);
+         mdiv.remove(mdiv.selectedIndex);
+cnt++;
+         //mdiv.remove()
+            //only first column read
+
+        //alert(option);
+        //selected single items in second list box
+        //
+    }
+    function del()
+    {
+        var cell=document.forms['f']['s3'].value;
+        var mdiv=document.getElementById("s3");
+        var mdiv1=document.getElementById("s2");
+        var option = document.createElement("option");
+        option.setAttribute("value",cell);
+        option.innerHTML =cell;
+        //only first column read
+        mdiv1.appendChild(option);
+        mdiv.remove(mdiv.selectedIndex);
+
+        //selected items in first list box
+    }
+    function alladd()
+    {
+        var listbox = document.forms['f']['s2'];
+        s=listbox.children.length;
+            for(var index = 0; index < s; index++) {
+                if (listbox.children[index].selected) {
+                    var mdiv=document.getElementById("s3");
+                    var option = document.createElement("option");
+                    option.setAttribute("id","opt1"+cnt);
+                    option.setAttribute("value",listbox.children[index].value);
+                    option.innerHTML =listbox.children[index].value;;
+                    //only first column read
+                    mdiv.appendChild(option);
+                    cnt++;
+                   //listbox.remove(listbox.selectedIndex);
+                }
+            }
+        for(var index = 0; index < listbox.children.length; index++) {
+
+            if (listbox.children[index].selected) {
+                alert(listbox.children[index].value);
+                listbox.remove(index);
+                index--;
+            }
+            }
+        //selected multiple items in second
+    }
+    function alldelete()
+    {
+        var listbox = document.forms['f']['s3'];
+
+        for(var index = 0; index < listbox.children.length; index++) {
+            if (listbox.children[index].selected) {
+                var mdiv=document.getElementById("s2");
+                var option = document.createElement("option");
+                option.setAttribute("value",listbox.children[index].value);
+                option.innerHTML =listbox.children[index].value;
+                //only first column read
+                mdiv.appendChild(option);
+                //listbox.remove(listbox.selectedIndex);
+            }
+        }
+        for(var index = 0; index < listbox.children.length; index++) {
+            if (listbox.children[index].selected) {
+                alert(listbox.children[index].value);
+                listbox.remove(index);
+                index--;
+            }
+        }
+        //selected multiple items in second
+        //selected items add in second list box
+        //selected items delete from second list box
+    }
+    function up()
+    {
+        var mdiv1111=document.getElementById("s3");
+        n=mdiv1111.selectedIndex;
+       // document.write();
+       // alert("the text is"+document.getElementById("opt1"+n).innerHTML);
+var optsel=document.getElementById("opt1"+n).innerHTML;
+n1=n-1;
+var optsel2=document.getElementById("opt1"+n1).innerHTML;
+        document.getElementById("opt1"+n).innerHTML=optsel;
+        document.getElementById("opt1"+n1).innerHTML=optsel2;
+        //selected items get swapped to top
+    }
+    function down()
+    {
+        var mdiv=document.getElementById("s3");
+        n=mdiv.selectedIndex;
+        var div=document.getElementById("opt1"+n).innerHTML;
+        var div2=document.getElementById("opt1"+(n+1)).innerHTML;
+        document.getElementById("opt1"+n).innerHTML=div2;
+        document.getElementById("opt1"+(n+1)).innerHTML=div;
+        document.write(document.getElementById("opt"+n).innerHTML+document.getElementById("opt"+(n+1)).innerHTML+n);
+        //selected items get sorted in descending
+    }
+    function mno1() {
+        mydiv = document.getElementById("tb1");
+
+        var listbox=document.getElementById("s3");
+        var div2 = document.forms['f']['s1'].value;
+        // var div3=document.forms['f']['s'].value;
+        //var input = event.target;
+        var reader = new FileReader();
+
+        reader.readAsText(document.getElementById("f2").files[0]);
+        //reader1.readAsText(document.getElementById("f1").files[0]);
+        reader.onload = function () {
+            var text = reader.result;
+            var rows = text.split("\n");
+            var w = 0;
+            s=listbox.children.length;
+            for(var index = 0; index < s; index++) {
+                if (listbox.children[index].selected) {
+                    arr[index]=listbox.children[index].value;
+                    //listbox.remove(listbox.selectedIndex);
+                }
+            }
+            //alert(rows);
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].split(",");
+                aTag = document.createElement("tr");
+                for (var j = 0; j < cells.length; j++) {
+                    //alert(cells[0]);
+
+                    //var cells1=cells[w].split(",");
+
+                    if (cells[j] == div2) {
+                        w = i;
+                        //alert(cells[j]);
+                    }
+                }
+                if (w >1) {
+                    for (k = w; k <= w; k++) {
+                        var cells1 = rows[w].split(",");
+                        aTag = document.createElement("tr");
+                        for (var k1 = 0; k1 < cells1.length; k1++)
+                        {
+                            aTag1 = document.createElement("td");
+                            aTag1.innerHTML = cells1[k1];
+                            // var cells=rows[i].split(",");
+                            aTag.appendChild(aTag1);
+                            mydiv.appendChild(aTag);
+                            }
+                        }
+                        w=1;
+                    }
+                }
+
+            }
+
+            // console.log(reader.result.substring(0, 200));
+
+        //reader.readAsText(input.files[1]);
+    }
+        // show records according to the selection of the column name in second listbox
+
+</script>
+</body>
+</html>

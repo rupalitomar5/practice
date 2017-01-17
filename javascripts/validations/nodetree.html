@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body id ="bd">
+<form name="f1">
+    <input type="button" value="Add node" onclick="add()"/>
+</form>
+<div id="div">
+
+</div>
+<script>
+    var cnt=0;
+    function add1()
+    {
+        var mydiv = document.getElementById('div');
+
+        //document.write("the number is"+i);
+        var aTag= document.createElement('input');
+        aTag.setAttribute('type', "text");
+        aTag.setAttribute('id', "tag" + cnt);
+        //aTag.innerHTML=q.d[i];
+        mydiv.appendChild(aTag);
+        var aTag= document.createElement('input');
+        aTag.setAttribute('type', "button");
+        aTag.setAttribute('id', "btn" + cnt);
+        aTag.setAttribute('value', "Click for a child node");
+        aTag.setAttribute('onclick',"add()");
+        //aTag.innerHTML=q.d[i];
+        mydiv.appendChild(aTag);
+        cnt++;
+    }
+    function add()
+    {
+        var mydiv = document.getElementById('div');
+        var aTag= document.createElement('div');
+        //aTag.setAttribute('type', "text");
+        aTag.setAttribute('id', "div" + cnt);
+        if(cnt>0)
+        {
+            //aTag.innerHTML=q.d[i];
+            mydiv.appendChild(aTag);
+            add1();
+        }
+        //to add the node child
+
+    }
+</script>
+</body>
+</html>
