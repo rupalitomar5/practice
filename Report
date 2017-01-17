@@ -1,0 +1,13 @@
+Today's work
+
+Tried insert,update,delete and select with nodejs with storing values in session in folder my-todolist
+
+Difficulty:
+1. Was unable to run the files
+2. Using middleware during update
+3. Passing multiple values to the form on callback
+
+Future Work:
+will try to operate through the file and database 
+
+
