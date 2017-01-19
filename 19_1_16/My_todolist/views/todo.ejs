@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>My todolist</title>
+        <style>
+            a {text-decoration: none; color: black;}
+        </style>
+    </head>
+
+    <body>
+        <h1>My todolist</h1>
+<code>
+        <ul>
+       <!-- % todolist.forEach(function(todo, index) { %>
+            % priority.forEach(function(p,index1){%>
+            % member.forEach(function(m,index2){%>
+            % if((index==index1) && (index1==index2)){%>
+            <li><a href="/todo/delete/<!--%= index %>-->"><!--delete  </a><a href="/todo/update/<!--<= index %>"> update</a>&nbsp;%= todo %>&nbsp;%=p %>&nbsp;%=m %></li>
+            % }})})});%>
+-->
+        </ul>
+</code>
+        <form action="/api/todo/add/" method="post">
+            <p>
+                <label for="newtodo">What shoud be done?</label>
+                <input type="text" name="newtodo" id="newtodo" autofocus /><br>
+                <label for="newtodo">Assigned to whom?</label>
+                <input type="text" name="taskassigned" id="taskassigned" /><br>
+                Priority:
+                <select name="s1" id="s1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+                <input type="submit" />
+            </p>
+        </form>
+    </body>
+</html>
