@@ -1,7 +1,12 @@
-<form action="/todo/update/" method="post">
+<form action="/api/todo/update/" method="post">
     <p>
-        <label for="newtodo">What shoud I do?</label>
-        <input type="text" name="updatedtodo" id="updatedtodo" autofocus />
+        <label for="updatedtodo">What shoud I do?</label>
+        <input type="text" name="updatedtodo" id="updatedtodo" autofocus /><br>
+        <label for="updatedpriority">Priority</label>
+        <input type="text" name="updatedpriority" id="updatedpriority" /><br>
+        <label for="updatedmember">Assigned to whom?</label>
+        <input type="text" name="updatedmember" id="updatedmember" /><br>
         <input type="submit" />
     </p>
+
 </form>
