@@ -45,7 +45,7 @@ Task.find({},"-_id Todo",function(err,task){
         //console.log(myo.Todo);
     }
    //console.log(arr[1]);
-});
+}).limit(10);
     Task.find({},"-_id Memberassigned",function(err,task){
         arr=task;
         for (var i in arr)
@@ -58,7 +58,7 @@ Task.find({},"-_id Todo",function(err,task){
         }
        // res.json(task);
         //array1=task
-    });
+    }).limit(10);
     Task.find({},"_id",function(err,task){
         arr=task;
         for (var i in arr)
@@ -83,7 +83,7 @@ Task.find({},"-_id Todo",function(err,task){
             arr2[i]=myo.Priority;
             //console.log(myo.Todo);
         }
-    });
+    }).sort({KEY:-1}).limit(10);
     res.render('todo.ejs',{todolist:arr1, priority: array1, member:arr2,index:array});
 });
     router.get('/todo1', function(req, res) {
