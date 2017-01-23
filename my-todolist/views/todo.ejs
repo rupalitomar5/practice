@@ -16,17 +16,49 @@
             <% priority.forEach(function(p,index2){%>
             <% member.forEach(function(m,index3){%>
             <% index.forEach(function(l,index4){%>
+            <!--% step1.forEach(function(n,index5){%>-->
+
             <% if((index1==index2) && (index2==index3)&&(index3==index4)){%>
             <li><a href="/api/todo/delete/<%= l %>">delete  </a><a href="/api/todo/update/<%= l %>"> update</a>&nbsp;<%= todo %>&nbsp;<%=p %>&nbsp;<%=m %></li><%}})})})});%>
 
         </ul>
+    <a href="/api/todo/">1</a>
+    <a href="/api/todo/2">2</a>
+    <a href="/api/todo/3">3</a>
 </code>
-        <form action="/api/todo/add/" method="post">
-            <p>
-                <label for="newtodo">What shoud be done?</label>
+        <script>
+            var cnt=0;
+            function join()
+            {
+                var p1=document.getElementById("p1");
+                var p2=document.createElement("br");
+                var input=document.createElement('input');
+                    input.setAttribute('type',"text");
+                    input.setAttribute('id',"text["+cnt+"]");
+                    input.setAttribute('name',"text["+cnt+"]");
+                    p1.appendChild(p2);
+                    p1.appendChild(input);
+                cnt++;
+
+            }
+            function s()
+            {
+                return cnt;
+            }
+        </script>
+        <form action="/api/todo/add/" method="post" />
+            <p id="p1">
+                <label for="newtodo">What should be done?</label>
                 <input type="text" name="newtodo" id="newtodo" autofocus /><br>
+                <label for="newtodo">Steps involved in the task?</label>
+                <br><input type="text" name="Step" id="Step" />
+            </p>
+
+                <input type="button" name="Step" id="Step" value="Step" onclick="join()"/><br>
                 <label for="newtodo">Assigned to whom?</label>
                 <input type="text" name="taskassigned" id="taskassigned" /><br>
+            <!--input type="hidden" name ="hid" value="s()"/-->
+        <!--input type="file" name="name" id="name" multiple/-->
                 Priority:
                 <select name="s1" id="s1">
                     <option>1</option>
@@ -35,7 +67,6 @@
                     <option>4</option>
                 </select>
                 <input type="submit" />
-            </p>
         </form>
     </body>
 </html>
