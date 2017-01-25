@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="todo">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+        Node/Angular Todo app
+    </title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js">
+    </script>
+    <script src="core.js"></script>
+</head>
+<body ng-controller="mainController">
+
+    <!-- HEADER AND TODO COUNT -->
+    <div>
+        <h1>I'm a Todo-aholic <span>{{ todos.length }}</span></h1>
+    </div>
+
+    <!-- TODO LIST -->
+    <div>
+        <div>
+
+            <!-- LOOP OVER THE TODOS IN $scope.todos -->
+            <div ng-repeat="todo in todos">
+                <label>
+                    <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+                </label>
+            </div>
+
+        </div>
+    </div>
+<div ng-app="Myapp" w3-test-directive></div>
+<script>
+    var app=angular.module("MyApp",[]);
+    app.directive("w3TestDirective",function(){
+        return{
+            template:"I was made in a directive constructor"
+        }
+    })
+
+</script>
+</body>
+</html>
