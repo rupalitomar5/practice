@@ -1,7 +1,7 @@
 exports.dbConfig = {
     user: "sa",
     password: "Lanetteam1",
-    server: "mongodb://localhost:27017",
+    server: "mongodb://localhost",
     database: "test",
-    port: 1433
+    port:27017
 };

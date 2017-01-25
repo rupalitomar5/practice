@@ -1,6 +1,6 @@
 var express = require('express');
 var multer=require('multer');
-var session = require('cookie-session'); // Loads the piece of middleware for sessions
+var session = require('cookie-session');
 var bodyParser = require('body-parser');// Loads the piece of middleware for managing the settings
 var mongoose=require('mongoose');
 var validator=require('validator');
@@ -88,6 +88,7 @@ function addme(n,m,res)
     Task.find({}, "-_id Priority", function (err, task) {
 
         arr = task;
+        //arr.forEach();
         for (var i in arr) {
             //console.log(arr[i]);
             var myo = new Object();
@@ -106,7 +107,7 @@ function addme(n,m,res)
 }
 /*
 /* The to do list and the form are displayed */
-router.get('/todo', function(req, res) {
+router.get('/todo', function(req, res,next) {
    // var token = req.body.token || req.query.token || req.headers['x-access-token'];
     if(token)
     {
@@ -125,37 +126,40 @@ addme(0,10,res);
 router.get('/todo/login',function(req,res) {
     res.render('login.ejs');
 });
-router.post('/todo/login/',
+router.post('/todo/login/', urlencodedParser,
     function(req,res){
-    user.findOne({'name':req.body.member,'admin':true},function(err,user){
+    user.findOne({'name':req.body.member},function(err,user){
+        console.log(user);
         if(!user)
-        {
-            user.findOne({'name':req.body.member,'admin':false},function(err,user){
-                if(!user) {
+        {                    res.json({success:false,message:'Authentication failed.user not found'})
+        }
 
-                    res.json({success:false,message:'Authentication failed.user not found'})
-                }else if(user){
-                    if(user.password!=req.body.password)
-                {
-                    res.json({success:false,message:'Authentication failed.Wrong password'})
-                }}
-                else
-                {
-                    req.session.name = user;
-                    res.redirect('/todo/member');
-                }
-            });
+        else if(user){
+            console.log(user);
+            console.log(user.password);
+            console.log(req.body.password);
+            //req.session.name = user;
+            //res.redirect('/todo/member');
+            //res.json({success:false,message:'Authentication failed.user not found'});
 
-        }else if(user){
             if(user.password!=req.body.password)
             {
                 res.json({success:false,message:'Authentication failed.Wrong password'})
             }else{
-                var token1=jwt.sign(user,app.get('supersecret'),{
-                    expiresInMinutes:1440
-                });
-                token=token1;
-                res.redirect('/todo')
+                if(user.admin==true) {
+
+
+                    var secret = config.secret;
+                    console.log(secret);
+                    var token1 = jwt.sign(user, app.get('superSecret'), {
+                        expiresIn: 1440
+                    });
+                    token = token1;
+                    res.redirect('/api/todo');
+                }
+                else{
+                    res.redirect('/todo/member');
+                }
             }
         }
 
@@ -277,6 +281,10 @@ router.post('/todo/add/', urlencodedParser, function(req, res) {
             //alert("No data updated");
             res.redirect('/api/todo1')
         }});
+router.get('*', function (req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+    // load the single view file (angular will handle the page changes on the front-end)
+});
 /* Deletes an item from the to do list */
 router.get('/todo/delete/:id', function(req, res) {
 
@@ -300,17 +308,19 @@ router.get('/todo/delete/:id', function(req, res) {
 /* Redirects to the to do list if the page requested is not found */
 app.use('/api',router);
 app.use(function(req, res, next) {
-
+console.log(id1);
 if(id1==0)
 {
-    res.redirect('/api/todo/login');
-
+    router.route('/api/todo');
 }
 else
 {
     res.redirect('/api/todo1');
 }
+//next();
 });
+
+
 app.set('superSecret',config.secret);
 app.use(morgan('dev'));
 app.listen(8010);
