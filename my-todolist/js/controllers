@@ -1,0 +1,37 @@
+/**
+ * Created by lcom64 on 27/1/17.
+ */
+angular.module('TodoApp.controllers',[]).controller('TodoListController',function ($scope,$state,popupService,$window,Todo){
+
+    $scope.Todo=Todo.query();
+    $scope.deleteTodo=function(Todo)
+    {
+        if(popupService.showPopup("Really delete this?"))
+        {
+            Todo.$delete(function(){
+                $window.location.href='';
+            });
+        }
+    };
+}).controller('TodoListController',function($scope,$stateParams,Todo){
+    $scope.Todo=Todo.get({id:$stateParams});
+
+}).controller('TodoCreateController',function($scope,$state,$stateParams,Todo){
+    $scope.Todo=new Todo();
+
+    $scope.addTodo =function(){
+        $scope.Todo.$save(function(){
+            $state.go('Todo');
+        });
+    };
+}).controller('TodoEditController',function($scope,$state,$stateParams,Todo){
+    $scope.updateTodo=function(){
+        $scope.Todo.$update(function(){
+            state.go('Todo');
+        });
+    };
+    $scope.loadTodo=function(){
+        $scope.Todo(Todo.get({id:$stateParams.id}))
+    };
+    $scope.loadTodo();
+})
