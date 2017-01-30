@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="app1">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/angular.js"></script>
+</head>
+<body>
+<div ng-controller="MainController as main">
+    <li ng-repeat="movies in main.favourites">
+    {{ movies.title }}
+        <p ng-hide="!movies.popular">the movie is popular</p>
+    </li>
+</div>
+<script src="app.js"></script>
+<script src="MainController.js"></script>
+
+</body>
+</html>
