@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html app="app2">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="UserController as user">
+    <form ng-submit="user.getUser()">
+        <input type="text" ng-model="user.userId">
+        <input type="submit">
+        Search user
+    </form>
+    <pre>{{user.chosenUser}}</pre>
+</div>
+<script src="app.js"></script>
+<script src="MainController.js"></script>
+</body>
+</html>
