@@ -6,7 +6,7 @@
     "cookie-session": "~1.1.0",
     "ejs": "~2.1.4",
     "express": "~4.11.0",
-    "mongoose": "4.7,7",
+    "mongoose": "4.7.7",
     "multer": "^1.2.1",
     "validator": "6.2.1",
     "path":"0.12.7",
