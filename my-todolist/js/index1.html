@@ -6,11 +6,60 @@
     <script src="../lib/angular.js"></script>
 </head>
 <body>
+
+
+
 <div ng-controller="MainController as main">
-    <li ng-repeat="movies in main.favourites">
+    <input type="text" placeholder="type to search" ng-model="main.myObject.two">
+    <pre>{{main.myObject|json}}</pre>
+    <a href="" ng-click="type='year'">Year</a>
+    <a href="" ng-click="type='title'">Title</a>
+    <div ng-repeat="like in main.likelist">
+        {{like.title}}
+        <a href="" ng-click="main.unlike($index);">Unlike</a>
+    </div>
+    <div ng-repeat="movies in main.favourites | orderBy:type:false|filter:{year:search}">
     {{ movies.title }}
+        <a href="" ng-click="main.addToLikes(movies)">Add like</a>
         <p ng-hide="!movies.popular">the movie is popular</p>
-    </li>
+    </div>
+    <div>
+        <form ng-submit="main.addMovie()">
+            <input type="text" placeholder="" ng-model="main.newtitle">
+            <input type="text" placeholder="" ng-model="main.release">
+            <button type="submit">Add new</button>
+        </form>
+    </div>
+    <!--index1.html
+    input tag
+
+    ng-focus="function name"
+    ng-blur="function name"
+    controller
+    this.functionname=function (){
+    }-->
+    {{main.myDate| date:'EEEE'}}<br>
+    {{main.myDate| date:'medium'}}<br>
+    {{main.myDate| date:'short'}}<br>
+    {{main.myDate| date:'longDate'}}<br>
+    {{main.myDate| date:'MMMM'}}<br>
+    {{main.myDate| date:'MM'}}<br>
+    {{main.myDate| date:'yyyy'}}<br>
+    {{main.myDate| date:'HH'}}<br>
+    {{main.myDate| date:'EEEE'}}<br>
+    {{main.myAmount|currency}}
+    {{main.myAmount|currency:'USD':1}}
+
+    <a href="" ng-click="Mykey='one'">
+        {{ main.myarray.length>0?
+        "Something here":
+        "Nothing here"
+        }}
+    </a>
+    <a ng-href="" target="_blank"> <img ng-src="../uploads/image" height="100" width="100"/></a>
+
+    {{main.myObject[Mykey]}}
+
 </div>
 <script src="app.js"></script>
 <script src="MainController.js"></script>
