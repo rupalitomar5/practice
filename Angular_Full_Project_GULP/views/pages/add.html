@@ -1,0 +1,86 @@
+<html ng-app="app">
+<head>
+    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="../../bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+
+</head>
+<body ng-controller="addController as ctrl">
+<form ng-submit="ctrl.addUser()" method="post">
+    <div class="container d-table">
+        <div class="d-100vh-va-middle">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card-group">
+                        <div class="card p-2">
+                            <div class="card-block">
+                                <h1>Add your post</h1>
+                                <div class="input-group mb-1">
+                                    <span class="input-group-addon"><i class="icon-user"></i>
+                                    </span>
+                                    <input type="text" ng-model="name" class="form-control" placeholder="Name" required autofocus>
+                                </div>
+                                <div class="input-group mb-2">
+                                    <span class="input-group-addon"><i class="icon-lock"></i>
+                                    </span>
+                                    <input type="email" ng-model="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="input-group mb-2">
+                                    <span class="input-group-addon"><i class="icon-lock"></i>
+                                    </span>
+                                    <select ng-model="state" ng-options="x for x in ctrl.array">
+
+                                    </select>
+<!--<div ng-repeat="city in ctrl.Myobject | orderBy:type:false">-->
+                                    <select ng-model="city" ng-options="x for x in ctrl.Myobject[selectedName1]">
+
+                                    </select>
+<!--</div>-->
+
+                                </div>
+                                <div>
+                                    Gender
+                                <label>
+                                    <input type="radio" ng-model="gender" value="male">
+                                    Male
+                                </label>
+                                <label>
+                                    <input type="radio" ng-model="gender" value="female">
+                                    Female
+                                </label><br/>
+                                </div>
+                                <div>
+                                    <label>Active:
+                                        <input type="checkbox" ng-model="Active">
+                                    </label><br/>
+                                </div>
+                                <ng-daterangepicker ng-model="ctrl.daterange" locale="en"></ng-daterangepicker>
+                                <div>
+                                    <input type="submit" value="Submit"/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <!--<button type="button" class="btn btn-primary px-2">Login</button>-->
+                                    </div>
+                                    <div class="col-xs-6 text-xs-right">
+                                        <!--<button type="button" class="btn btn-link px-0">Forgot password?</button>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-inverse card-primary py-3 hidden-md-down" style="width:44%">
+                            <div class="card-block text-xs-center">
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="../../js/controllers/app.js"></script>
+<script src="../../js/controllers/addController.js"></script>
+</body>
+</html>
