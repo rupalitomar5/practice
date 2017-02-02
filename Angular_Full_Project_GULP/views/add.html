@@ -1,12 +1,135 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html ng-app="app">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <!--<script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+<script src="../bower_components/moment/moment.js"></script>-->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <!--<link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css"/>-->
 </head>
-<body>
-<div ng-controller="">
+<div ng-controller="addController as ctrl" >
+<form ng-submit="ctrl.addUser()" method="post" onload="ctrl.getUser()">
+    <h1>Add your post</h1>
+    <div class="input-group mb-1">
+        <span class="input-group-addon"><i class="icon-user"></i>
+        </span>
+        <input type="text" ng-model="name" class="form-control" placeholder="Name" required autofocus>
+    </div>
+    <div class="input-group mb-1">
+        <span class="input-group-addon"><i class="icon-user"></i>
+        </span>
+        <input type="date" ng-model="date" class="form-control" placeholder="Name" required autofocus>
+    </div>
+    <div class="input-group mb-2">
+        <span class="input-group-addon"><i class="icon-lock"></i>
+        </span>
+                                    <input type="email" ng-model="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="input-group mb-2">
+                                    <span class="input-group-addon"><i class="icon-lock"></i>
+                                    </span>
+                                    <label>
+                                    <select ng-model="state" ng-options="x for x in ctrl.array">
+                                    </select>
+                                        Choose state
+                                    </label>
+<!--<div ng-repeat="city in ctrl.Myobject | orderBy:type:false">-->
+                                    <label>
+                                    <select ng-model="city" ng-options="x for x in ctrl.Myobject[state]">
 
+                                    </select>
+                                        Choose city
+<!--</div>--></label>
+
+                                </div>
+    <!--<div class="card">
+        <div class="card-header">
+            <i class="fa fa-edit"></i> DateRangePicker
+            <div class="card-actions">
+                <a href="https://github.com/fragaria/angular-daterangepicker">
+                    <small class="text-muted">docs</small>
+                </a>
+            </div>
+        </div>
+        <div class="card-block" ng-controller="dateRangeCtrl">
+            <fieldset class="form-group" ng-controller="dateRangeCtrl">
+                <label>DateRangePicker</label>
+                <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i>
+                            </span>
+                    <input date-range-picker class="form-control date-picker" type="text" ng-model="date" option="opts" />
+                </div>
+                <small class="text-muted">Selected: {{date.endDate|json}}</small>
+            </fieldset>
+        </div>
+    </div>-->
+                                <div>
+                                    Gender
+                                <label>
+                                    <input type="radio" ng-model="gender" value="male">
+                                    Male
+                                </label>
+                                <label>
+                                    <input type="radio" ng-model="gender" value="female">
+                                    Female
+                                </label><br/>
+                                </div>
+                                <div>
+                                    <label>Active:
+                                        <input type="checkbox" ng-model="Active">
+                                    </label><br/>
+                                </div>
+                                <!--<ng-daterangepicker ng-model="ctrl.daterange" locale="en"></ng-daterangepicker>-->
+                                <div>
+                                    <input type="submit" value="Submit"/>
+                                </div>
+    <!--------------------------------------------------------------------------------------------------------------->
+
+    <table>
+        <tr>
+            <td>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editItem(item)">Edit</button>
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    </table>
+
+
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-show="displayForm">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+
+                                                <div class="form-group">  <input type="text" ng-model="strl.name"  class="form-control"/></div>
+                                                <div class="form-group"><input type="text" ng-model="email"  class="form-control" /></div>
+                                                <div class="form-group"> <input type="text" ng-model="state"  class="form-control" /></div>
+                                                <div class="form-group"> <input type="text" ng-model="city"  class="form-control"/></div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" ng-click="saveItem()">Save</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+</form>
+
+<script src="../js/controllers/app.js"></script>
+<script src="../js/controllers/addController.js"></script>
 </div>
-</body>
 </html>

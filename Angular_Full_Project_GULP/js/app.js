@@ -19,7 +19,8 @@ angular
         'ncy-angular-breadcrumb',
         'angular-loading-bar',
         'ngSanitize',
-        'ngAnimate'
+        'ngAnimate'//,
+        //'daterangepicker'
     ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
@@ -32,3 +33,4 @@ angular
         $rootScope.$state = $state;
         return $rootScope.$stateParams = $stateParams;
     }]);
+

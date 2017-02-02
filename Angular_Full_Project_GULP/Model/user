@@ -1,6 +1,6 @@
 var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
-var UserSchema=new Schema({
+var User2Schema=new Schema({
     name:String,
     password:String,
     email:String,
@@ -11,5 +11,5 @@ var UserSchema=new Schema({
     Gender:String,
     IsDeleted:Boolean
 });
-module.exports=mongoose.model('user',UserSchema);
+module.exports=mongoose.model('User2',User2Schema);
 
