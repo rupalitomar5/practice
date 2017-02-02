@@ -50,6 +50,13 @@ angular
                     }],
                 }
             })
+            .state('app.add', {
+                url: '/user',
+                templateUrl: 'views/add.html',
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
+            })
             .state('app.main', {
                 url: '/dashboard',
                 templateUrl: 'views/main.html',
@@ -139,6 +146,7 @@ angular
                 url: '/500',
                 templateUrl: 'views/pages/500.html'
             })
+
 
             //UI Kits
             .state('app.uikits', {
