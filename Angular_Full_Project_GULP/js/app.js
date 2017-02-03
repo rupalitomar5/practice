@@ -22,10 +22,17 @@ angular
         'ngAnimate'//,
         //'daterangepicker'
     ])
+
+        .config(function ($httpProvider) {
+            $httpProvider.defaults.withCredentials = true;
+            delete $httpProvider.defaults.headers.common["X-Requested-With"];
+        })
+
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
         cfpLoadingBarProvider.latencyThreshold = 1;
     }])
+
     .run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
         $rootScope.$on('$stateChangeSuccess',function(){
             document.body.scrollTop = document.documentElement.scrollTop = 0;
