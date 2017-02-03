@@ -4,11 +4,12 @@
     <!--<script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="../bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
 <script src="../bower_components/moment/moment.js"></script>-->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <!--<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>-->
     <!--<link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css"/>-->
 </head>
-<div ng-controller="addController as ctrl" >
-<form ng-submit="ctrl.addUser()" method="post" onload="ctrl.getUser()">
+<div ng-controller="addController as ctrl" data-ng-init="ctrl.getUser()">
+
+<form ng-submit="ctrl.addUser()" method="post" >
     <h1>Add your post</h1>
     <div class="input-group mb-1">
         <span class="input-group-addon"><i class="icon-user"></i>
@@ -18,7 +19,7 @@
     <div class="input-group mb-1">
         <span class="input-group-addon"><i class="icon-user"></i>
         </span>
-        <input type="date" ng-model="date" class="form-control" placeholder="Name" required autofocus>
+        <input type="date" ng-model="date" class="form-control" required>
     </div>
     <div class="input-group mb-2">
         <span class="input-group-addon"><i class="icon-lock"></i>
@@ -79,30 +80,44 @@
                                         <input type="checkbox" ng-model="Active">
                                     </label><br/>
                                 </div>
+    <div>
+    <input type = "file" file-model = "myFile"/>
+    <button ng-click = "uploadFile()">upload me</button>
+    </div>
                                 <!--<ng-daterangepicker ng-model="ctrl.daterange" locale="en"></ng-daterangepicker>-->
                                 <div>
                                     <input type="submit" value="Submit"/>
                                 </div>
+
     <!--------------------------------------------------------------------------------------------------------------->
 
-    <table>
-        <tr>
+    <table >
+        <tr ng-repeat="user in users">
             <td>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editItem(item)">Edit</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="ctrl.editItem(user._id)">Edit</button>
+            </td>
+
+            <td>
+                {{user.name}}
             </td>
             <td>
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-
+                 {{user.email}}
             </td>
             <td>
-
+                {{user.state}}
+            </td>
+            <td>
+                {{user.city}}
+            </td>
+            <td>
+                {{user.Dob}}
+            </td>
+            <td>
+            {{user.Gender}}
             </td>
         </tr>
     </table>
+</form>
 
 
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-show="displayForm">
@@ -110,14 +125,14 @@
                                         <div class="modal-content">
                                             <div class="modal-body">
 
-                                                <div class="form-group">  <input type="text" ng-model="strl.name"  class="form-control"/></div>
-                                                <div class="form-group"><input type="text" ng-model="email"  class="form-control" /></div>
-                                                <div class="form-group"> <input type="text" ng-model="state"  class="form-control" /></div>
-                                                <div class="form-group"> <input type="text" ng-model="city"  class="form-control"/></div>
-
+                                                <div class="form-group">  <input type="text" ng-model="user.name"  class="form-control"/></div>
+                                                <div class="form-group"><input type="text" ng-model="user.email"  class="form-control" /></div>
+                                                <div class="form-group"> <input type="text" ng-model="user.state"  class="form-control" /></div>
+                                                <div class="form-group"> <input type="text" ng-model="user.city"  class="form-control"/></div>
+                                                <div class="form-group"> <input type="text" ng-model="user.Dob"  class="form-control"/></div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-primary" ng-click="saveItem()">Save</button>
+                                                <button class="btn btn-primary" ng-click="ctrl.saveitem(user._id)" onclose="modal">Save</button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
@@ -127,7 +142,7 @@
 
 
 
-</form>
+
 
 <script src="../js/controllers/app.js"></script>
 <script src="../js/controllers/addController.js"></script>

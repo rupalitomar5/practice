@@ -54,7 +54,7 @@ angular
                 url: '/user',
                 templateUrl: 'views/add.html',
                 ncyBreadcrumb: {
-                    label: 'Home'
+                    label: 'Add your Profile'
                 }
             })
             .state('app.main', {

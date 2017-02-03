@@ -3,37 +3,25 @@ angular
     .module('app')
     .controller('languageCtrl', languageCtrl)
     .controller('addController', addController)
-    //.controller('dateRangeCtrl', dateRangeCtrl);
+    .service('fileUpload', ['$http', function ($http) {
+        this.uploadFileToUrl = function(file, uploadUrl){
+            var fd = new FormData();
+            fd.append('file', file);
 
-dateRangeCtrl.$inject = ['$scope'];
-function dateRangeCtrl($scope) {
-    $scope.date = {
-        startDate: moment().subtract(5, 'days'),
-        endDate: moment()
-    };
-    $scope.opts = {
-        drops: 'up',
-        opens: 'left',
-        ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1,'days'), moment().subtract(1,'days')],
-            'Last 7 days': [moment().subtract(7,'days'), moment()],
-            'Last 30 days': [moment().subtract(30,'days'), moment()],
-            'This month': [moment().startOf('month'), moment().endOf('month')]
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+
+                .success(function(){
+                })
+
+                .error(function(){
+                });
         }
-    };
+    }])
 
-    //Watch for date changes
-    $scope.$watch('date', function(newDate) {
-        //console.log('New date set: ', newDate);
-    }, false);
-}
-
-
-
-
-
-addController.$inject=['$http','$scope'];
+addController.$inject=['$http','$scope','fileUpload'];
 languageCtrl.$inject = ['$translate', '$scope'];
 function languageCtrl($translate, $scope) {
     function checkLanguage(languages, langKey) {
@@ -67,15 +55,14 @@ function languageCtrl($translate, $scope) {
         }
     ]
     $scope.languages = languages;
-    checkLanguage(languages, $translate.use())
+    checkLanguage(languages, $translate.use());
     $scope.changeLanguage = function (langKey) {
         $translate.use(langKey);
         checkLanguage(languages, langKey)
     };
 }
+function addController($http,$scope,fileUpload) {
 
-function addController($http,$scope,$filter, moment, uiCalendarConfig) {
-    this.array1=[]
     $scope.displayForm = false;
     this.array = ['Gujarat', 'Maharashtra', 'Uttarakhand'];
     this.Myobject = {
@@ -83,27 +70,99 @@ function addController($http,$scope,$filter, moment, uiCalendarConfig) {
         Maharashtra: ["Mumbai", "pune", "Aurangabad"],
         Uttarakhand: ["Haridwar", "Hrishikesh", "Mussorie"]
     };
-    this.getUser=function(){
-var API="http://localhost:8001/api/user";
-$http.get(API)
-    .then(function(response){
-       this.array1=response.data;
-    })
+    this.getUser = function () {
+        $scope.users = [];
+        $http.get('http://localhost:8001/api/user').then(function (d) {
+                console.log(d);
+                for (i in d.data) {
+                    $scope.users[i] = d.data[i];
+                }
+
+            }, function (err) {
+                console.log(err);
+            }
+        );
 
     };
-    this.data={
-        call1:function(){
-            return{'name':$scope.name,'email':$scope.email,'state':$scope.state,'city':$scope.city,'gender':$scope.gender,'daterange':$scope.date,'active':$scope.active}
-        }
-    };
-    $scope.editItem = function (data) {
-        $scope.employee = data;
+
+
+    this.editItem = function (data) {
+        $scope.user = [];
+        $http.get('http://localhost:8001/api/user/' + data).then(function (d) {
+                console.log(d);
+                $scope.user = d.data;
+
+            }, function (err) {
+                console.log(err);
+            }
+        );
+        // $scope.employee = data;
         $scope.displayForm = true;
-    }
-    this.addUser = function () {
-        var API = "http://localhost:8001/api/user";
-        $http.post(API,this.data.call1);
     };
-};
+    this.addUser = function () {
+        $http({
+            url: 'http://localhost:8001/api/user',
+            method: 'POST',
+            data: {
+                'name': $scope.name,
+                'email': $scope.email,
+                'state': $scope.state,
+                'city': $scope.city,
+                'gender': $scope.gender,
+                'daterange': $scope.date,
+                'active': $scope.active
+            }
+        });
 
+        $scope.uploadFile = function () {
+            var file = $scope.myFile;
+
+            console.log('file is ');
+            console.dir(file);
+
+            var uploadUrl = "http://localhost:8001/api/user";
+            fileUpload.uploadFileToUrl(file, uploadUrl);
+        }
+    }
+}
+    /*.directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function(){
+                    scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }])*/
+
+
+
+
+        /*this.saveitem=function(data1){
+            console.log(data1);
+            $http({
+                url: 'http://localhost:8001/api/user/'+data1,
+                method: 'POST',
+                data: {
+                    'name': $scope.user.name,
+                    'email': $scope.user.email,
+                    'state': $scope.user.state,
+                    'city': $scope.user.city,
+                    'gender': $scope.user.gender,
+                    'daterange': $scope.user.date,
+                    'active': $scope.active
+                    //'dob': $scope.newprofile.dob,
+                    //'stateid': $scope.newprofile.stateid,
+                    //'cityid': $scope.newprofile.cityid,
+                    //'profileimg': $scope.newprofile.profileimg,
+                    //'status': $scope.newprofile.status
+                }})
+
+        }*/
 
