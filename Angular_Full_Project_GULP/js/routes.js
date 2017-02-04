@@ -56,13 +56,22 @@ angular
                 ncyBreadcrumb: {
                     label: 'Add your Profile'
                 }
+
+            })
+            .state('app.modal', {
+                url: '/modal',
+                templateUrl: 'views/modal.html',
+                ncyBreadcrumb: {
+                    label: 'Add your Profile'
+                }
+
             })
             .state('app.main', {
                 url: '/dashboard',
                 templateUrl: 'views/main.html',
                 //page title goes here
                 ncyBreadcrumb: {
-                    label: 'Home',
+                    label: 'Home'
                 },
                 //page subtitle goes here
                 params: { subtitle: 'Welcome to Real Bootstrap 4 Admin Template' },

@@ -19,8 +19,8 @@ angular
         'ncy-angular-breadcrumb',
         'angular-loading-bar',
         'ngSanitize',
-        'ngAnimate'//,
-        //'daterangepicker'
+        'ngAnimate',
+        'ui.bootstrap'
     ])
 
         .config(function ($httpProvider) {
