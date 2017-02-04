@@ -1,13 +1,15 @@
 <html ng-app="app">
 <head>
     <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
     <!--<script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="../bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
 <script src="../bower_components/moment/moment.js"></script>-->
     <!--<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>-->
     <!--<link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css"/>-->
 </head>
-<div ng-controller="addController as ctrl" data-ng-init="ctrl.getUser()">
+<div >
+<div ng-controller="addController as ctrl" >
 
 <form ng-submit="ctrl.addUser()" method="post" >
     <h1>Add your post</h1>
@@ -91,12 +93,16 @@
 
     <!--------------------------------------------------------------------------------------------------------------->
 
-    <table >
+    <table  data-ng-init="ctrl.getUser()">
         <tr ng-repeat="user in users">
             <td>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="ctrl.editItem(user._id)">Edit</button>
             </td>
 
+
+            <td>
+                <button class="btn btn-primary" ng-click="deleteItem(user._id)">Delete</button>
+            </td>
             <td>
                 {{user.name}}
             </td>
@@ -119,7 +125,6 @@
     </table>
 </form>
 
-
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-show="displayForm">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -132,7 +137,7 @@
                                                 <div class="form-group"> <input type="text" ng-model="user.Dob"  class="form-control"/></div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-primary" ng-click="ctrl.saveitem(user._id)" onclose="modal">Save</button>
+                                                <button class="btn btn-primary" ng-click="ctrl.saveitem(user._id)">Save</button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
@@ -144,7 +149,30 @@
 
 
 
-<script src="../js/controllers/app.js"></script>
-<script src="../js/controllers/addController.js"></script>
+
 </div>
+</div>
+   <!-- <div ng-controller="MyModalController as vm">
+    <script type="text/ng-template" id="templates/CustomModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{vm.content.title}}</h3>
+    </div>
+    <div class="modal-body">
+        {{vm.content.message}}
+    </div>
+    <div class="modal-footer">
+        <button class="ad-button ad-blue" type="button" ng-click="vm.confirm()">
+            confirm
+        </button>
+        <button class="ad-button ad-blue" type="button" ng-click="vm.cancel()">
+            cancel
+        </button>
+    </div>
+</script>
+    </div>
+    <button modal-trigger size="'sm'" title="'Hello World!'" message="'This is a test'">
+        Click Me
+    </button>
+</div>&ndash;&gt;-->
+
 </html>
