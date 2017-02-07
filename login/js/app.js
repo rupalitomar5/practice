@@ -19,41 +19,50 @@ angular.module('myapp',['ngRoute','ui.bootstrap','angularModalService','ngAnimat
         }
     })
     .controller('listController',function($scope,$http){
-        $scope.items=['hdhsjhfshf','dshgsjhchb'];
-        $scope.status={
-            isopen:false
-        };
-        $scope.toggled=function(open){
-           console.log("open");
-        };
-        $scope.toggleDropDown=function($event){
-            $event.preventDefault();
-            $event.stopPropagation();
-            $scope.status.isopen = !$scope.status.isopen;
-        };
-        $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
         $scope.emp = [];
-        function getUser(){
+       $scope.getEmp=function (){
             $http
-                .get('http://localhost:8000/api/user')
+                .get('http://localhost:8001/api/employee')
                 .then(function (d) {
                     $scope.emp= d.data;
+                    console.log(d.data);
                     //$scope.emp=d;
     })}})
 .controller('ComplexController', [
-    '$scope', '$element', 'title', 'close',
-    function($scope, $element, title, close) {
+    '$scope', '$element', 'title','emp', 'close','Upload',
+    function($scope, $element, title,emp,close,Upload) {
 
         $scope.name = null;
         $scope.employee = null;
         $scope.title = title;
-
+        $scope.emp2=emp;
         //  This close function doesn't need to use jQuery or bootstrap, because
         //  the button has the 'data-dismiss' attribute.
         $scope.close = function() {
+            var add=function(){
+                Upload.upload({
+                    url: 'http://localhost:8001/api/employee',
+                    method: 'POST',
+                    data: {
+                        'name': $scope.name,
+                        'employee':$scope.employee,
+                        'file':$scope.file
+                    }
+                })
+                    .success(function(data){
+                        //$scope.newprofile = {};
+                        $scope.emp2 = data;
+
+                    })
+                    .error(function(data){
+                        console.log(data);
+                    })
+            }
+            add();
             close({
                 name: $scope.name,
-                age: $scope.employee,
+                employee: $scope.employee,
+                file:$scope.file
             }, 500); // close, but give 500ms for bootstrap to animate
         };
 
@@ -65,36 +74,37 @@ angular.module('myapp',['ngRoute','ui.bootstrap','angularModalService','ngAnimat
             $element.modal('hide');
 
             //  Now call close, returning control to the caller.
-            close({
+            close(
+                {
                 name: $scope.name,
-                age: $scope.age
+                employee: $scope.employee,
+                file:$scope.file
             }, 500); // close, but give 500ms for bootstrap to animate
         };
 
-        function add(){
-            Upload.upload({
-                url: 'http://localhost:8001/api/user',
-                method: 'POST',
-                data: {
-                    'name': $scope.name,
-                    'customer':$scope.employee
-                }
-            })
-    }}]
+    }]
     )
-.controller('SampleController', ['$scope', 'ModalService', function($scope, ModalService){
+.controller('SampleController', ['$scope', 'ModalService','$http', function($scope, ModalService,$http){
+    $scope.getUser1= function() {
+        $scope.emp2=[];
+        $http
+            .get('http://localhost:8001/api/employeename')
+            .then(function (d) {
+                $scope.emp2 = d.data;
+                console.log($scope.emp2)
+            })
+    }
     $scope.showComplex = function() {
-
+       $scope.getUser1();
         ModalService.showModal({
             templateUrl: "views/modal.html",
             controller: "ComplexController",
             inputs: {
-                title: "A More Complex Example"
+                title: "A More Complex Example",
+                emp: $scope.emp2
             }
         }).then(function(modal) {
-           // modal.element.modal();
             modal.close.then(function(result) {
-                $scope.complexResult  = "Name: " + result.name + ", EmployeeName: " + result.employee;
             });
         });
 
