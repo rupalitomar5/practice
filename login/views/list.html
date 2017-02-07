@@ -1,24 +1,22 @@
 <div>
+    <div ng-controller="listController" data-ng-init="getEmp()">
+        <table>
+            <tr ng-repeat="e in emp">
+                <td>
+                    {{e.Name}}
+                </td>
+                <td>
+                  <img src="../uploads/{{e.File}}" alt="Smiley face" height="42" width="42">
+                </td>
+                <td>
+                    {{e.EmployeeId}}
+                </td>
+            </tr>
+        </table>
+        <div ng-controller="SampleController" data-spy="scroll" data-target="#mainNav">
+            <p><a href class="btn btn-default btn-lg " ng-click="showComplex()">Show Complex</a></p>
+            <!--<pre ng-show="complexResult">{{complexResult}}</pre>-->
+        </div>
+    </div>
+</div>
 
-    <div ng-controller="listController"></div>
-    <select ng-model="dropdown" ng-options="x for x in items" ng-click="submit()">
-    </select>
-</div>
-<div ng-controller="SampleController" data-spy="scroll" data-target="#mainNav">
-    <p><a href class="btn btn-default btn-lg " ng-click="showComplex()">Show Complex</a></p>
-    <pre ng-show="complexResult">{{complexResult}}</pre>
-</div>
-<table>
-    <tr ng-repeat="user in emp">
-        <td>
-            {{emp.Name}}
-        </td>
-        <td>
-            {{emp.File}}
-        </td>
-        <td>
-            {{emp.}}
-        </td>
-    </tr>
-</table>
-</div>

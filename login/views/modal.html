@@ -1,14 +1,14 @@
-<div class="modal fade">
+<div class="modal fade"  >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">{{title}}</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" >
                 <p>Ads the details</p>
 
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" enctype="multipart/form-data" >
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
@@ -16,15 +16,26 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="image" class="col-sm-2 control-label">Age</label>
+                        <!--<label for="image" class="col-sm-2 control-label">Employee Pic</label>-->
                         <div class="col-sm-10">
-                            <input type="file" class="form-control" id="image" placeholder="File" ng-model="file">
+                            <input
+                                    type="file"
+                                    ngf-select
+                                    ng-model="file"
+                                    name="file"
+                                    ngf-pattern="'image/*'"
+                                    accept="image/*"
+                                    ngf-max-size="20MB"
+                            />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="employee" class="col-sm-2 control-label"></label>
+                        <label for="employee" class="col-sm-2 control-label">Employee </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="employee" placeholder="Employee name" ng-model="employee"> <!--ng-repeat="array in ctrl.array1|filter:{year:search}-->">
+                            <input list="employee1" id="employee" ng-model="employee">
+                            <datalist id="employee1" ng-repeat="empl in emp2">
+                                <option value="{{empl.Name}}">{{empl.Name}}</option>
+                            </datalist>
                         </div>
                     </div>
                 </form>
