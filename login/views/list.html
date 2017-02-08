@@ -1,19 +1,40 @@
 <div>
     <div ng-controller="listController" data-ng-init="getEmp()">
+        <div class="col-md-2">
+            <!--Sidebar content-->
+
+            Search: <input ng-model="query">
+
+        </div>
         <table>
-            <tr ng-repeat="e in emp">
+            <tr>
+        <th>
+            <button ng-click="sortBy('Name')">Name</button>
+            <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
+        </th>
+        <th>
+            <button ng-click="sortBy('File')">File</button>
+            <span class="sortorder" ng-show="propertyName === 'file'" ng-class="{reverse: reverse}"></span>
+        </th>
+        <th>
+            <button ng-click="sortBy('EmployeeId')">Employee Id</button>
+            <span class="sortorder" ng-show="propertyName === 'employee'" ng-class="{reverse: reverse}"></span>
+        </th>
+        </tr>
+
+            <tr ng-repeat="e in emp| orderBy:propertyName:reverse|filter:query">
                 <td>
                     {{e.Name}}
                 </td>
                 <td>
-                  <img src="../uploads/{{e.File}}" alt="Smiley face" height="42" width="42">
+                  <img ng-src="uploads/{{e.File}}" height="42" width="42">
                 </td>
                 <td>
                     {{e.EmployeeId}}
                 </td>
             </tr>
         </table>
-        <div ng-controller="SampleController" data-spy="scroll" data-target="#mainNav">
+        <div ng-controller="SampleController as sc" data-spy="scroll" data-target="#mainNav">
             <p><a href class="btn btn-default btn-lg " ng-click="showComplex()">Show Complex</a></p>
             <!--<pre ng-show="complexResult">{{complexResult}}</pre>-->
         </div>

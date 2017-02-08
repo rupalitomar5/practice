@@ -9,8 +9,9 @@ var app = express();
 app.use(urlencodedParser);
 var router = express.Router();
 var multer=require('multer');
-var id;
+
 app.use('/uploads',express.static(__dirname+"/upload"));
+
 var upload=multer({dest:"./uploads/"}).array('name',1);
 app.use(cors({
     allowedOrigins: [
@@ -33,7 +34,7 @@ router.get("/employeename",function(req,res){
     Employee.find({},"-_id Name",function(err,employees){
         res.json(employees)
     })
-})
+});
 
 
 var storage = multer.diskStorage({
@@ -51,21 +52,29 @@ var upload = multer({ //multer settings
     storage: storage
 }).single('file');
 router.post("/employee", upload,function(req,res) {
-    console.log("it is here");
-    var emp3 = new Employee();
-    emp3.Name = req.body.name;
+
     Employee.findOne({Name:req.body.employee},"_id",function(err,id1){
-    id=id1;
-})
-    emp3.EmployeeId = id;
-    emp3.File = req.body.file;
-    emp3.save(function (err, emp3) {
-        if (err) {
-            console.log(err);
+        //console.log(id1);
+        var emp3 = new Employee();
+        emp3.Name = req.body.name;
+        emp3.EmployeeId = id1;
+        emp3.File = req.body.file;
+        emp3.save(function (err, emp3) {
+            if (err) {
+                console.log(err);
+            }
+            else{
+                console.log(emp3);
+            }
+        })
+    });
+    /*upload(req,res,function(err){
+        if(err) {
+            return res.end(err);
         }
-        console.log(emp3);
-    })
-})
+    })*/
+
+});
 
 
 /*
@@ -74,8 +83,5 @@ router.put();*/
 router.delete("/employee/:id",function(req,res){
     Employee.findByIdAndRemove(req.params.id,function(err,emp){console.log(emp);});
 });
-
-
-
 app.use('/api',router);
 app.listen(8001);
