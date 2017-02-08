@@ -12,6 +12,7 @@ angular.module('myapp',['ngRoute','ui.bootstrap','angularModalService','ngAnimat
                 templateUrl:'views/list.html',
                 controller:'listController'
             })
+
     })
     .controller('mainController',function($scope,$location){
         $scope.submit=function(){
@@ -20,6 +21,10 @@ angular.module('myapp',['ngRoute','ui.bootstrap','angularModalService','ngAnimat
     })
     .controller('listController',function($scope,$http){
         $scope.emp = [];
+        $scope.sortBy = function(propertyName) {
+            $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+            $scope.propertyName = propertyName;
+        };
        $scope.getEmp=function (){
             $http
                 .get('http://localhost:8001/api/employee')
@@ -29,13 +34,17 @@ angular.module('myapp',['ngRoute','ui.bootstrap','angularModalService','ngAnimat
                     //$scope.emp=d;
     })}})
 .controller('ComplexController', [
-    '$scope', '$element', 'title','emp', 'close','Upload',
-    function($scope, $element, title,emp,close,Upload) {
+    '$scope', '$element', 'close','Upload',
+    function($scope, $element, close, Upload) {
 
-        $scope.name = null;
-        $scope.employee = null;
-        $scope.title = title;
-        $scope.emp2=emp;
+        //$scope.name = null;
+        //$scope.title = title;
+
+        console.log($scope.getUser1);
+        //console.log($scope.emp2);
+        //$scope.employee=$scope.$parent.getUser1();
+        console.log($scope.$parent.emp2);
+
         //  This close function doesn't need to use jQuery or bootstrap, because
         //  the button has the 'data-dismiss' attribute.
         $scope.close = function() {
@@ -57,6 +66,7 @@ angular.module('myapp',['ngRoute','ui.bootstrap','angularModalService','ngAnimat
                     .error(function(data){
                         console.log(data);
                     })
+
             }
             add();
             close({
@@ -64,6 +74,7 @@ angular.module('myapp',['ngRoute','ui.bootstrap','angularModalService','ngAnimat
                 employee: $scope.employee,
                 file:$scope.file
             }, 500); // close, but give 500ms for bootstrap to animate
+
         };
 
         //  This cancel function must use the bootstrap, 'modal' function because
@@ -85,29 +96,30 @@ angular.module('myapp',['ngRoute','ui.bootstrap','angularModalService','ngAnimat
     }]
     )
 .controller('SampleController', ['$scope', 'ModalService','$http', function($scope, ModalService,$http){
-    $scope.getUser1= function() {
-        $scope.emp2=[];
+     $scope.emp2=[];
+     $scope.getUser1= function() {
         $http
             .get('http://localhost:8001/api/employeename')
             .then(function (d) {
                 $scope.emp2 = d.data;
-                console.log($scope.emp2)
+                console.log(emp2);
+                return $scope.emp2;
             })
-    }
+
+    };
     $scope.showComplex = function() {
-       $scope.getUser1();
+        //emp2= getUser1();
+        console.log($scope.emp2);
         ModalService.showModal({
             templateUrl: "views/modal.html",
             controller: "ComplexController",
-            inputs: {
-                title: "A More Complex Example",
-                emp: $scope.emp2
-            }
+            resolve: {
+                getUser1: function () {
+                    return $scope.getUser1();
+                }}
         }).then(function(modal) {
             modal.close.then(function(result) {
             });
         });
-
     }
 }]);
-
